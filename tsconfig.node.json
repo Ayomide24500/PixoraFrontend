@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+
+    /* Change module and resolution for Vite/Modern Node */
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    "target": "ES2022",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+
+    /* Remove baseUrl and update paths */
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["vite.config.ts"],
+  "exclude": ["node_modules"]
+}
