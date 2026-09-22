@@ -1,8 +1,12 @@
-import HeroPage from "@/components/HeroPage";
+import HeroPage from "@/pages/HeroPage";
 import Navbar from "@/components/Navbar";
 import { Provider, ProviderGrid } from "@/components/ProviderCard";
 import ProviderModal from "@/components/ProviderModal";
 import React, { useState } from "react";
+import HowItWorks from "./HowItWork";
+import Testimonials from "./Testimonial";
+import Footer from "./Footer";
+import AuthModal from "./Auth/AuthModal";
 
 const Homepage = () => {
   const [activeRole, setActiveRole] = useState<
@@ -76,13 +80,21 @@ const Homepage = () => {
           <HeroPage onSearchSubmit={handleSearchSubmit} />
 
           {/* 3. Verified Provider Discovery Grid */}
-          <ProviderGrid
-            categoryFilter={searchCategory}
-            locationFilter={searchLocation}
-            onSelectProvider={handleSelectProvider}
-          />
+          <div id="explore">
+            <ProviderGrid
+              categoryFilter={searchCategory}
+              locationFilter={searchLocation}
+              onSelectProvider={handleSelectProvider}
+            />
+          </div>
+
+          {/* 4. Complete Landing Page Sections */}
+          <HowItWorks />
+          <Testimonials />
         </>
       )}
+
+      <Footer />
 
       {/* 4. Interactive Provider Profile & Booking Modal */}
       <ProviderModal
@@ -97,54 +109,11 @@ const Homepage = () => {
 
       {/* Simple Auth Modal Placeholder */}
       {authModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-pixora-card border border-pixora-border p-6 rounded-2xl max-w-md w-full relative">
-            <h3 className="text-xl font-bold text-white mb-2">
-              Welcome to Pixora
-            </h3>
-            <p className="text-xs text-gray-400 mb-6">
-              Sign in to your account to request providers or manage your
-              creative business.
-            </p>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs text-gray-400 mb-1 font-medium">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  placeholder="name@example.com"
-                  className="w-full bg-black/50 border border-pixora-border rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-pixora-gold"
-                />
-              </div>
-              <div>
-                <label className="block text-xs text-gray-400 mb-1 font-medium">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  className="w-full bg-black/50 border border-pixora-border rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-pixora-gold"
-                />
-              </div>
-
-              <button
-                onClick={() => setAuthModalOpen(false)}
-                className="w-full py-3 bg-pixora-gold text-black font-semibold rounded-xl text-sm transition-colors hover:bg-pixora-goldHover"
-              >
-                Sign In to Pixora
-              </button>
-            </div>
-
-            <button
-              onClick={() => setAuthModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
+        <AuthModal
+          isOpen={authModalOpen}
+          onClose={() => setAuthModalOpen(false)}
+          initialView="login"
+        />
       )}
     </div>
   );

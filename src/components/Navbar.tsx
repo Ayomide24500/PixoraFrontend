@@ -65,40 +65,6 @@ const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right Side Actions & Role Switcher (MVP Utility) */}
         <div className="hidden lg:flex items-center gap-4">
-          {/* Quick role toggle for previewing experiences */}
-          <div className="bg-pixora-card border border-pixora-border p-1 rounded-xl flex items-center text-xs">
-            <button
-              onClick={() => onRoleChange("customer")}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                activeRole === "customer"
-                  ? "bg-pixora-gold text-black font-semibold"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Customer
-            </button>
-            <button
-              onClick={() => onRoleChange("provider")}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                activeRole === "provider"
-                  ? "bg-pixora-gold text-black font-semibold"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Provider
-            </button>
-            <button
-              onClick={() => onRoleChange("admin")}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
-                activeRole === "admin"
-                  ? "bg-pixora-gold text-black font-semibold"
-                  : "text-gray-400 hover:text-white"
-              }`}
-            >
-              Admin
-            </button>
-          </div>
-
           <button
             onClick={onOpenAuth}
             className="px-5 py-2.5 rounded-xl bg-pixora-card border border-pixora-border hover:border-pixora-gold text-white text-sm font-medium transition-colors flex items-center gap-2"
