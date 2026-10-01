@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-import {
-  Camera,
-  Menu,
-  X,
-  Shield,
-  User,
-  Briefcase,
-  PlusCircle,
-  Search,
-} from "lucide-react";
+import { Menu, X, User } from "lucide-react";
+import pic from "../assets/logo.png";
 
 interface NavbarProps {
   activeRole: "customer" | "provider" | "admin";
@@ -28,9 +20,12 @@ const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo & Tagline */}
         <div className="flex items-center gap-3 cursor-pointer">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pixora-gold to-yellow-600 flex items-center justify-center shadow-lg shadow-pixora-gold/10">
-            <Camera className="w-5 h-5 text-black" />
-          </div>
+          {/* Logo with inverted dark-to-light filter and gold drop glow */}
+          <img
+            src={pic}
+            alt="Pixora Logo"
+            className="h-10 w-auto object-contain invert mix-blend-screen drop-shadow-[0_0_8px_rgba(226,190,88,0.3)] transition-transform hover:scale-105"
+          />
           <div>
             <span className="text-xl sm:text-2xl font-black tracking-wider text-white">
               PIXORA
@@ -61,15 +56,9 @@ const Navbar: React.FC<NavbarProps> = ({
           >
             How it Works
           </a>
-          <a
-            href="/dashboard"
-            className="hover:text-pixora-gold transition-colors"
-          >
-            Dashboard
-          </a>
         </nav>
 
-        {/* Right Side Actions & Role Switcher (MVP Utility) */}
+        {/* Right Side Actions & Role Switcher */}
         <div className="hidden lg:flex items-center gap-4">
           <button
             onClick={onOpenAuth}
@@ -125,13 +114,6 @@ const Navbar: React.FC<NavbarProps> = ({
               className="py-2 hover:text-pixora-gold"
             >
               How it Works
-            </a>
-            <a
-              href="/dashboard"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 hover:text-pixora-gold"
-            >
-              Dashboard
             </a>
           </div>
 
