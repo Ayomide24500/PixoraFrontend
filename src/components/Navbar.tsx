@@ -61,6 +61,12 @@ const Navbar: React.FC<NavbarProps> = ({
           >
             How it Works
           </a>
+          <a
+            href="/dashboard"
+            className="hover:text-pixora-gold transition-colors"
+          >
+            Dashboard
+          </a>
         </nav>
 
         {/* Right Side Actions & Role Switcher (MVP Utility) */}
@@ -119,6 +125,13 @@ const Navbar: React.FC<NavbarProps> = ({
               className="py-2 hover:text-pixora-gold"
             >
               How it Works
+            </a>
+            <a
+              href="/dashboard"
+              onClick={() => setMobileMenuOpen(false)}
+              className="py-2 hover:text-pixora-gold"
+            >
+              Dashboard
             </a>
           </div>
 

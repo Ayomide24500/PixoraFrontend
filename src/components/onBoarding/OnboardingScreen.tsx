@@ -59,6 +59,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
   });
 
   const [equipmentInput, setEquipmentInput] = useState("");
+  const [providerTermsAccepted, setProviderTermsAccepted] = useState(false);
 
   const handleAddEquipment = () => {
     if (equipmentInput.trim()) {
@@ -94,7 +95,16 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
     if (role === "customer") {
       onComplete({ role, profile: customerData });
     } else {
-      onComplete({ role, profile: providerData });
+      if (!providerTermsAccepted) return;
+      onComplete({
+        role,
+        profile: {
+          ...providerData,
+          providerTermsAccepted: true,
+          providerTermsVersion: "v1.0",
+          providerTermsAcceptedAt: new Date().toISOString(),
+        },
+      });
     }
   };
 
@@ -438,6 +448,36 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
                     </span>
                   </div>
                 </div>
+
+                <div className="rounded-2xl border border-[#D4AF37]/25 bg-[#D4AF37]/[0.04] p-4">
+                  <p className="text-xs font-bold text-[#D4AF37]">
+                    Provider Agreement · v1.0 draft
+                  </p>
+                  <p className="mt-2 text-[11px] leading-5 text-gray-400">
+                    Pixora connects you with customers. You set service prices
+                    and agree to a 10% commission on your service amount;
+                    customers separately pay a 10% Pixora fee. Accepted
+                    bookings, availability, cancellations, disputes, and
+                    payouts follow Pixora&apos;s platform rules. Do not move
+                    Pixora-generated bookings off-platform to avoid applicable
+                    fees.
+                  </p>
+                  <label className="mt-3 flex cursor-pointer items-start gap-3 border-t border-white/[0.08] pt-3 text-xs leading-5 text-gray-300">
+                    <input
+                      type="checkbox"
+                      required
+                      checked={providerTermsAccepted}
+                      onChange={(event) =>
+                        setProviderTermsAccepted(event.target.checked)
+                      }
+                      className="mt-1 h-4 w-4 accent-[#D4AF37]"
+                    />
+                    <span>
+                      I have read and agree to Pixora&apos;s Provider Agreement
+                      and 10% commission terms.
+                    </span>
+                  </label>
+                </div>
               </div>
             )}
 
@@ -451,6 +491,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
               </button>
               <button
                 type="submit"
+                disabled={role === "provider" && !providerTermsAccepted}
                 className="px-8 py-3 bg-[#D4AF37] hover:bg-[#C5A028] text-black font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#D4AF37]/10"
               >
                 Complete Registration & Launch

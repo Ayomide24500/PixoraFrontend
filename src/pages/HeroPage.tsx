@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Search,
   MapPin,
@@ -23,56 +23,9 @@ const CATEGORIES = [
   { name: "Event Coverage", icon: Sparkles },
 ];
 
-const TYPING_WORDS = [
-  "elite visual creators",
-  "expert videographers",
-  "skilled photographers",
-  "master cinematographers",
-];
-
 const HeroPage = ({ onSearchSubmit }: HeroProps) => {
   const [selectedCategory, setSelectedCategory] = useState("Videography");
   const [location, setLocation] = useState("Lagos, Nigeria");
-
-  // Typewriter & Transition States
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(110);
-  const [isFading, setIsFading] = useState(false);
-  const [phase, setPhase] = useState("typing");
-
-  useEffect(() => {
-    const fullText = TYPING_WORDS[currentWordIndex];
-    let timer;
-
-    if (phase === "typing") {
-      if (currentText.length < fullText.length) {
-        // Slower, steadier typing pace
-        timer = setTimeout(() => {
-          setCurrentText(fullText.slice(0, currentText.length + 1));
-        }, 150);
-      } else {
-        setPhase("holding");
-      }
-    } else if (phase === "holding") {
-      // Sit on the finished word for a proper beat before moving on
-      timer = setTimeout(() => {
-        setIsFading(true);
-        setPhase("fading");
-      }, 2800);
-    } else if (phase === "fading") {
-      // Let the CSS opacity transition actually finish before swapping words
-      timer = setTimeout(() => {
-        setCurrentText("");
-        setCurrentWordIndex((prev) => (prev + 1) % TYPING_WORDS.length);
-        setIsFading(false);
-        setPhase("typing");
-      }, 700);
-    }
-
-    return () => clearTimeout(timer);
-  }, [currentText, phase, currentWordIndex]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,17 +55,12 @@ const HeroPage = ({ onSearchSubmit }: HeroProps) => {
           </span>
         </div>
 
-        {/* Main Headline with Smooth Typewriter & Opacity Transition */}
+        {/* Main Headline (Static & Stable layout) */}
         <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.12] mb-6 animate-fade-in-up opacity-0 [animation-delay:200ms]">
           Connect with{" "}
-          <span
-            className={`inline-block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-pixora-gold transition-opacity duration-700 ease-in-out ${
-              isFading ? "opacity-0" : "opacity-100"
-            }`}
-          >
-            {currentText}
-          </span>
-          <span className="animate-pulse text-pixora-gold font-normal">|</span>{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-pixora-gold">
+            elite visual creators
+          </span>{" "}
           & equipment.
         </h1>
 

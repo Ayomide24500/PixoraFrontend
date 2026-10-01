@@ -55,4 +55,7 @@ export interface ProviderProfile {
   idType: string;
   idDocumentUrl?: string;
   isVerified: boolean;
+  providerTermsAccepted?: boolean;
+  providerTermsVersion?: string;
+  providerTermsAcceptedAt?: string;
 }

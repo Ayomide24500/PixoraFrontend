@@ -7,6 +7,7 @@ import HowItWorks from "./HowItWork";
 import Testimonials from "./Testimonial";
 import Footer from "./Footer";
 import AuthModal from "./Auth/AuthModal";
+import MarketplaceWorkspace from "./MarketplaceWorkspace";
 
 const Homepage = () => {
   const [activeRole, setActiveRole] = useState<
@@ -55,25 +56,9 @@ const Homepage = () => {
 
       {/* Main View Router based on role (For MVP demonstration) */}
       {activeRole === "provider" ? (
-        <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-3xl font-bold text-pixora-gold mb-4">
-            Provider Dashboard View
-          </h1>
-          <p className="text-gray-400">
-            Here creators manage their portfolio, incoming requests, and
-            earnings.
-          </p>
-        </div>
+        <MarketplaceWorkspace initialRole="provider" />
       ) : activeRole === "admin" ? (
-        <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-3xl font-bold text-pixora-gold mb-4">
-            Admin Control Center
-          </h1>
-          <p className="text-gray-400">
-            Here platform admins oversee user verification, reports, and system
-            analytics.
-          </p>
-        </div>
+        <MarketplaceWorkspace initialRole="admin" />
       ) : (
         <>
           {/* 2. Cinematic Hero Section */}
